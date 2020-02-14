@@ -123,7 +123,7 @@ variable "cognito_role_arn" {
   default = ""
 }
 
-variable "domain_policy_identifiers" {
+variable "domain_admin_policy_identifiers" {
   default = ["*"]
 }
 
