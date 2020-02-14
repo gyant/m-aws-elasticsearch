@@ -18,7 +18,7 @@ variable "instance_type" {
 }
 
 variable "instance_count" {
-  default = "3"
+  default = 3
 }
 
 variable "dedicated_master_enabled" {
