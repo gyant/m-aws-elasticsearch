@@ -1,4 +1,7 @@
-variable "vpc_id" {}
+variable "vpc_id" {
+  default = ""
+}
+
 variable "domain" {}
 
 variable "es_version" {
@@ -46,7 +49,8 @@ variable "snapshot_start_hour" {
 }
 
 variable "vpc_subnets" {
-  type = "list"
+  type    = "list"
+  default = []
 }
 
 variable "vpc_security_groups" {
