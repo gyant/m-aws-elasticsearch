@@ -1,6 +1,8 @@
 # m-aws-elasticsearch
 
-This repo contains a Terraform module to deploy a VPC-based AWS Elasticsearch domain. Defaults can be altered to fine-tune the deployment. For instance, enforcing node-to-node encryption and https termination on the resulting cluster and kibana endpoints.
+This repo contains a Terraform module to deploy a VPC-based AWS Elasticsearch domain. Since this is VPC-based, the resulting domain will be inaccessible to the outside internet. 
+
+Defaults can be altered to fine-tune the deployment. For instance, enforcing node-to-node encryption and https termination on the resulting cluster and kibana endpoints.
 
 ## How to use this module:
 
@@ -16,6 +18,12 @@ module "elasticsearch" {
   vpc_subnets                     = ["${aws_subnet.a.id}", "${aws_subnet.b.id}", "${aws_subnet.c.id}"]
 }
 ```
+
+### Notes on Access Policies
+
+This module by default will construct a domain policy that allows anonymous access to all HTTP methods against the domain. This can be locked down by passing a user or role ARNs in a list via the `domain_admin_policy_identifiers` parameter. If the domain is locked down via IAM authentication, interfacing with the domain must be done via the [Signature Version 4 Signing Process](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
+
+It is also possible to restrict access based on originating IP (or range of IPs) within the VPC. This method does not require any additional signing. More information about all the options can be found [here](https://aws.amazon.com/blogs/security/how-to-control-access-to-your-amazon-elasticsearch-service-domain/).
 
 ## Inputs
 
