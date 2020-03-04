@@ -8,14 +8,12 @@ Defaults can be altered to fine-tune the deployment. For instance, enforcing nod
 
 The module will not run without the following minimum configuration:
 
-
-<!-- TODO -- MIGRATE THIS TO CUSTOMER REPO AND CHANGE REFERENCE URL -->
 ```
 module "elasticsearch" {
-  source                          = "git@github.com:gyant/m-aws-elasticsearch.git"
-  vpc_id                          = "${aws_vpc.main.id}"
+  source                          = "path/to/m-aws-elasticsearch"
+  vpc_id                          = aws_vpc.main.id
   domain                          = "test-domain"
-  vpc_subnets                     = ["${aws_subnet.a.id}", "${aws_subnet.b.id}", "${aws_subnet.c.id}"]
+  vpc_subnets                     = [aws_subnet.a.id, aws_subnet.b.id, aws_subnet.c.id]
 }
 ```
 
