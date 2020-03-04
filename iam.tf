@@ -16,7 +16,7 @@ data "aws_iam_policy_document" "es-admin" {
 
     principals {
       type        = "AWS"
-      identifiers = ["${var.domain_admin_policy_identifiers}"]
+      identifiers = var.domain_admin_policy_identifiers
     }
 
     resources = [
@@ -26,7 +26,7 @@ data "aws_iam_policy_document" "es-admin" {
 }
 
 resource "aws_elasticsearch_domain_policy" "es-admin" {
-  domain_name = "${aws_elasticsearch_domain.es.domain_name}"
+  domain_name = aws_elasticsearch_domain.es.domain_name
 
-  access_policies = "${data.aws_iam_policy_document.es-admin.json}"
+  access_policies = data.aws_iam_policy_document.es-admin.json
 }

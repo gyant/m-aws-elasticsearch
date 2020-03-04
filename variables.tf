@@ -9,7 +9,7 @@ variable "es_version" {
 }
 
 variable "advanced_options" {
-  type = "map"
+  type = map
 
   default = {
     "rest.action.multi.allow_explicit_index" = "true" # This is set by AWS when creating cluster. Causes constant plan diffs if not here.
@@ -49,12 +49,12 @@ variable "snapshot_start_hour" {
 }
 
 variable "vpc_subnets" {
-  type    = "list"
+  type    = list
   default = []
 }
 
 variable "vpc_security_groups" {
-  type    = "list"
+  type    = list
   default = []
 }
 
@@ -137,6 +137,6 @@ variable "tags" {
 
 locals {
   common_tags = {
-    Domain = "${var.domain}"
+    Domain = var.domain
   }
 }

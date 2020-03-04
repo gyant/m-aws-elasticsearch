@@ -1,11 +1,11 @@
 data "aws_vpc" "selected" {
-  id = "${var.vpc_id}"
+  id = var.vpc_id
 }
 
 resource "aws_security_group" "es" {
   name        = "elasticsearch-${var.domain}"
   description = "Managed by Terraform"
-  vpc_id      = "${var.vpc_id}"
+  vpc_id      = var.vpc_id
 
   ingress {
     from_port = 443
@@ -13,7 +13,7 @@ resource "aws_security_group" "es" {
     protocol  = "tcp"
 
     cidr_blocks = [
-      "${data.aws_vpc.selected.cidr_block}",
+      data.aws_vpc.selected.cidr_block,
     ]
   }
 
@@ -23,7 +23,7 @@ resource "aws_security_group" "es" {
     protocol  = "tcp"
 
     cidr_blocks = [
-      "${data.aws_vpc.selected.cidr_block}",
+      data.aws_vpc.selected.cidr_block,
     ]
   }
 }
